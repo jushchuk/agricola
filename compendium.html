@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+	<meta charset="utf-8"/>
 	<title>The Unofficial Agricola Compendium</title>
 	<style type="text/css">
-		body,p{text-align:left;text-indent:0;}
-		h1,h2,h3{text-align:center; font-weight:bold; border-top:1px dashed #666; margin-top:10px;padding-top:10px;}
+		body,p{text-align:left;text-indent:0;margin:40px auto;max-width:1000px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}
+		h1,h2,h3{text-align:center; font-weight:bold; border-top:1px dashed #666; margin-top:10px;padding-top:10px; line-height:1.2}
 		p.version{text-align:center;font-style:italic;}
 		.idnumber{font-weight:normal;}
 		span.ecp{font-style:italic;}
@@ -12,32 +13,45 @@
 		.cardref{font-style:normal;}
 		#intro p{text-indent:1em;}
 		p{background-color:transparent;}
-		ul.contents_links a {font-size:1.35em;}
-		h3 > a {padding-top:15px;}
+		ul.contents_links li {font-size:1.35em;}
+		h3 > a{padding-top:15px;}
+		ul.side_by_side_ul {list-style-type: none; display: inline-block;}
 	</style>
+	
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 	<meta name="HandheldFriendly" content="True" />
+	<script>
+		function handleSearch(){
+			window.location.href = '#'+document.getElementById('cid_input').value;
+		}
+	</script>
 </head>
 <body>
-<a name="start"/>
 <h1>The Unofficial Agricola Compendium</h1>
 <p class="version">Version 9.0 (2010-12-17)</p>
-<div id="intro"><p>This is a complete list of minor improvements and occupations in the game Agricola.</p>
-<br />
-<p>Each entry in this list contains the card text, the clarifications given in the appendix of the rulebook (where available), and a number of additional rulings. Many of these rulings are based on clarifications by Uwe Rosenberg, the game author, and Hanno Girke of Lookout Games. New rulings will be added when they're posted on BoardGameGeek or the Lookout-Games.de forums.</p>
-<br />
-<p>Some of the rulings have been made up entirely by me. These rulings are entirely unofficial, and can be changed at all times, for example when the game author contradicts them. These unofficial rulings are in italics <span class="ecp">like this</span>, and can be accepted or ignored as you wish.</p>
-<br />
-<p>This document is based on the German second edition of the game. The translation is based on (but not the same as) the translation by Melissa Rogerson.</p> </div>
 
-<h2>Acknowledgement</h2>
-<p>This compendium is not my (<a href="jushchuk.github.io/agricola">jushchuk</a>) own work. This is from <a href="https://alavigne.net/Gaming/Agricola/agricola-comp-v9.0.html">alavigne.net</a> which in turn may be related to this <a href="https://www.boardgamegeek.com/thread/334204/now-available-unofficial-agricola-compendium">boardgamegeek.com</a> post. I take no credit for the work, and I am hosting this for my own personal (non-commercial) use. The modifications I made were this acknowledgement, removing non-GEIK decks, and editing rulings related to <a class="cardref" href="#E29">Shepherd's Pipe</a> nor the <a class="cardref" href="#E59">Drinking Trough</a>.</p>
+<div id="search" style="text-align: center;">
+	<form action="javascript:handleSearch()">
+		<input id="cid_input" type="text" placeholder="Card ID">
+		<input type="submit" value="Submit">
+	</form> 
+</div>
 
-<a name="TOC"/>
+<h2>Introduction</h2>
+<div id="intro">
+	<details>
+		<summary>This is a complete list of minor improvements and occupations in the game Agricola.</summary>
+		<p>Each entry in this list contains the card text, the clarifications given in the appendix of the rulebook (where available), and a number of additional rulings. Many of these rulings are based on clarifications by Uwe Rosenberg, the game author, and Hanno Girke of Lookout Games. New rulings will be added when they're posted on BoardGameGeek or the Lookout-Games.de forums.</p>
+		<p>Some of the rulings have been made up entirely by the compendium author (who I believe is Eugene van der Pijll). These rulings are entirely unofficial, and can be changed at all times, for example when the game author contradicts them. These unofficial rulings are in italics <span class="ecp">like this</span>, and can be accepted or ignored as you wish.</p>
+		<p>This document is based on the German second edition of the game. The translation is based on (but not the same as) the translation by Melissa Rogerson.</p> 
+		<p>This compendium is originally not my (<a href="jushchuk.github.io/agricola">jushchuk</a>) own work. This is based of the hosted version from <a href="https://alavigne.net/Gaming/Agricola/agricola-comp-v9.0.html">alavigne.net</a> which in turn is from <a href="https://www.boardgamegeek.com/thread/334204/now-available-unofficial-agricola-compendium">boardgamegeek.com</a> post by Eugene van der Pijll. I am hosting this for my own personal (non-commercial) use. I have made modification including only displaying cards for deck I commonly play with.</p>
+	</details>
+</div>
+
 <div id="toc">
-	<h1>Table of Contents</h1>
+	<h2>Table of Contents</h2>
 	<ul class="contents_links">
-		<li><a href="#start">Introduction</a></li>
+		<li><a href="#">Introduction</a></li>
 		<li><b>Improvements</b></li>
 		<ul>
 			<li><a href="#impalpha">Sorted alphabetically</a></li>
@@ -50,8 +64,10 @@
 		</ul>
 	</ul>
 
-    <h2><a name="impalpha">Improvements - Alphabetically</a></h2>
-    <ul class="contents_links">
+	<h2><a name="impalpha">Improvements</a></h2>
+	<span>
+    <ul class="contents_links side_by_side_ul">
+		<li>Alphabetically</li>
 		<li><a href="#K105">Acreage (K105)</a></li>
 		<li><a href="#G061">Almanac (G061)</a></li>
 		<li><a href="#I64">Alms (I64)</a></li>
@@ -260,8 +276,8 @@
 		<li><a href="#K124">Yoke (K124)</a></li>
     </ul>
 
-    <h2><a name="impnum">Improvements - Numerically</a></h2>
-    <ul class="contents_links">
+	<ul class="contents_links side_by_side_ul">
+		<li>Numerically</li>
 		<li><a href="#A1A2">(A1/A2) Fireplace</a></li>
 		<li><a href="#A3A4">(A3/A4) Cooking Hearth</a></li>
 		<li><a href="#A5">(A5) Clay Oven</a></li>
@@ -469,9 +485,10 @@
 		<li><a href="#G118">(G118) Winter Garden</a></li>
 		<li><a href="#G119">(G119) Wooden Bridge</a></li>
     </ul>
-
-	<h2><a name="occalpha">Occupations - Alphabetically</a></h2>
-	<ul class="contents_links">
+	</span>
+	<h2><a name="occalpha">Occupations</a></h2>
+	<ul class="contents_links side_by_side_ul">
+		<li>Alphabetically</li>
 		<li><a href="#E148">Academic (E148)</a></li>
 		<li><a href="#K269">Acrobat (K269)</a></li>
 		<li><a href="#K267">Adoptive Parents (K267)</a></li>
@@ -703,8 +720,8 @@
 		<li><a href="#E165">Yeoman Farmer (E165)</a></li>
     </ul>
 
-    <h2><a name="occnum">Occupations - Numerically</a></h2>
-    <ul class="contents_links">
+    <ul class="contents_links side_by_side_ul">
+		<li>Numerically</li>
 		<li><a href="#E147">(E147) Land Agent</a></li>
 		<li><a href="#E148">(E148) Academic</a></li>
 		<li><a href="#E149">(E149) Master Baker</a></li>
