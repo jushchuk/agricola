@@ -54,7 +54,7 @@ function parseDataToGames(data) {
 
 // takes a single game data and makes it a table
 function createTable(gameData, captionText) {
-    let ignoreProperties = ['Players','Player','Winner','Game'];
+    let ignoreProperties = ['Players','Name','Horses','Winner','Game'];
 
     //create table and caption
     let table = document.createElement('table');
@@ -63,7 +63,7 @@ function createTable(gameData, captionText) {
     caption.textContent = captionText;
     
     //determine row keys
-    let keys = ['Player'];
+    let keys = ['Name'];
     for (let property in gameData[0]) {
         if(!ignoreProperties.includes(property)) {
             keys.push(property);
@@ -75,9 +75,11 @@ function createTable(gameData, captionText) {
         let row = table.insertRow(-1);
         let cell = row.insertCell(-1);
         cell.textContent = keys[k];
-        for(let i=0; i<gameData.length; i++) {
+        for(let i=0; i<5; i++) {
             cell = row.insertCell(-1);
-            cell.textContent = gameData[i][keys[k]];
+            if(i<gameData.length) {
+                cell.textContent = gameData[i][keys[k]];
+            }
         }
     }
 
@@ -96,4 +98,14 @@ function wrapWithDiv(element, className) {
     div.append(element);
 
     return div;    
+}
+
+function isExpansionGame(game) {
+    let containsHorses = false;
+    for(let i=0; i<game.length; i++) {
+        if(game[i]['Horses'] != 0) {
+            containsHorses = true;
+        }
+    }
+    return containsHorses;
 }

@@ -1,12 +1,33 @@
 /* scoresheet table style */
 table.scoresheet {
-
+    border: 1px solid black;
+    border-collapse:collapse;
     color: black;
 }
 
-table.scoresheet tr:nth-child(odd) td{
+table.scoresheet tr:nth-child(odd) {
     background-color: white;
 }
-table.scoresheet tr:nth-child(even) td{
+table.scoresheet tr:nth-child(even) {
     background-color: lightgray;
+}
+
+table.scoresheet tr td:first {
+    background-color: black;
+    color: white;
+}
+
+table.scoresheet tr td {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    width: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: right;
+}
+
+
+table.scoresheet tr:nth-child(1) td:nth-child(1) {
+    background-color: black;
+    color: white;
 }
