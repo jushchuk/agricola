@@ -1,33 +1,66 @@
 /* scoresheet table style */
 table.scoresheet {
-    border: 1px solid black;
+    border: 2px solid black;
     border-collapse:collapse;
     color: black;
+}
+
+table.scoresheet caption,
+table.scoresheet tr:nth-child(1) {
+    font-family: Dominica;
 }
 
 table.scoresheet tr:nth-child(odd) {
     background-color: white;
 }
+
 table.scoresheet tr:nth-child(even) {
     background-color: lightgray;
 }
 
-table.scoresheet tr td:first {
-    background-color: black;
-    color: white;
-}
 
 table.scoresheet tr td {
     border-left: 1px solid black;
     border-right: 1px solid black;
-    width: 20px;
+    width: 50px;
     padding-left: 5px;
     padding-right: 5px;
     text-align: right;
 }
 
+table.scoresheet tr td:nth-child(1) {
+    font-family: Dominica;
+    font-size: 75%;
+    border-right: 2px solid black;
+    width: 100px;
+}
 
-table.scoresheet tr:nth-child(1) td:nth-child(1) {
+table.scoresheet tr:nth-child(1) td:nth-child(1),
+table.scoresheet tr:last-child td:nth-child(1) {
     background-color: black;
     color: white;
+    font-size: 100%;
+}
+
+table.scoresheet tr:nth-child(1) td,
+table.scoresheet tr:nth-child(15) td  {
+    border-bottom: 2px solid black;
+}
+
+table.scoresheet tr:nth-child(3) td,
+table.scoresheet tr:nth-child(5) td,
+table.scoresheet tr:nth-child(8) td,
+table.scoresheet tr:nth-child(10) td,
+table.scoresheet tr:nth-child(12) td,
+table.scoresheet tr:nth-child(13) td  {
+    border-bottom: 1px solid black;
+}
+
+table.scoresheet tr td.winner  {
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Dominica'; /*a name to be used later*/
+    src: url('dominica.ttf'); /*URL to font*/
 }

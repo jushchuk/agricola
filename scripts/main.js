@@ -79,6 +79,10 @@ function createTable(gameData, captionText) {
             cell = row.insertCell(-1);
             if(i<gameData.length) {
                 cell.textContent = gameData[i][keys[k]];
+
+                if(gameData[i]['Winner'] == 'True'){
+                    cell.className = 'winner';
+                }
             }
         }
     }
