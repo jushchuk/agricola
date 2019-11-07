@@ -2,7 +2,8 @@ function populateTables(){
     let data = parseCSV(this.responseText);
     let games = parseDataToGames(data);
     
-    let tables_container = document.getElementById('tables_container')
+    let tablesContainer = document.getElementById('tables_container');
+    let tablesFooter = document.getElementById('tables_footer');
     
     for (let i=0; i<games.length; i++) {
         let gameNumber = games[i][0]['Game'];
@@ -25,7 +26,8 @@ function populateTables(){
         tables.push({'Game':gameNumber, 'Players':gamePlayers, 'Table':table});
 
         //add table to page... potentially do this another place
-        tables_container.appendChild(table);
+        let div = wrapWithDiv(table, 'panel')
+        tablesContainer.insertBefore(div, tablesFooter);
     }
 }
 

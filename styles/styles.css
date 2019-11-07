@@ -1,0 +1,12 @@
+/* scoresheet table style */
+table.scoresheet {
+
+    color: black;
+}
+
+table.scoresheet tr:nth-child(odd) td{
+    background-color: white;
+}
+table.scoresheet tr:nth-child(even) td{
+    background-color: lightgray;
+}

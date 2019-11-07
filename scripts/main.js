@@ -17,7 +17,7 @@ function loadFile(url, callback /*, opt_arg1, opt_arg2, ... */) {
     xhr.send(null);
 }
 
-// functions for manipulating CSV //
+// functions for manipulating CSV
 function parseCSV(CSVstring) {
     arr = CSVstring.split('\n')
     console.log(arr);
@@ -35,6 +35,7 @@ function parseCSV(CSVstring) {
     return jsonObj;
 }
 
+// takes json of game data and creates game objects
 function parseDataToGames(data) {
     let games = [];
     let game = [];
@@ -51,11 +52,13 @@ function parseDataToGames(data) {
     return games;
 }
 
-function createTable(gameData, captionText, tableName) {
+// takes a single game data and makes it a table
+function createTable(gameData, captionText) {
     let ignoreProperties = ['Players','Player','Winner','Game'];
 
     //create table and caption
     let table = document.createElement('table');
+    table.className = 'scoresheet';
     let caption = table.createCaption();
     caption.textContent = captionText;
     
@@ -82,4 +85,15 @@ function createTable(gameData, captionText, tableName) {
     let thead = table.createTHead();
     let tbody = table.createTBody();
     return table
+}
+
+//wraps any element with a div with a particular className
+function wrapWithDiv(element, className) {
+    let div = document.createElement('div');
+    if (className) {
+        div.className = className;
+    }
+    div.append(element);
+
+    return div;    
 }
