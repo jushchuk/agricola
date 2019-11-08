@@ -1,5 +1,19 @@
+/* Mobile media styles */
+
+@media screen and (max-width: 510px) {
+
+}
+
+
+
 /* scoresheet table style */
+.table_div {
+    padding: 10px;
+
+}
+
 table.scoresheet {
+    table-layout:fixed; width:355px;
     border: 2px solid black;
     border-collapse:collapse;
     color: black;
@@ -22,7 +36,7 @@ table.scoresheet tr:nth-child(even) {
 table.scoresheet tr td {
     border-left: 1px solid black;
     border-right: 1px solid black;
-    width: 50px;
+    
     padding-left: 5px;
     padding-right: 5px;
     text-align: right;
@@ -40,6 +54,10 @@ table.scoresheet tr:last-child td:nth-child(1) {
     background-color: black;
     color: white;
     font-size: 100%;
+}
+
+table.scoresheet tr:nth-child(1) td {
+    font-size: 75%;
 }
 
 table.scoresheet tr:nth-child(1) td,
@@ -64,3 +82,56 @@ table.scoresheet tr td.winner  {
     font-family: 'Dominica'; /*a name to be used later*/
     src: url('dominica.ttf'); /*URL to font*/
 }
+
+.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.header li {
+    float: left;
+}
+
+.header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row {
+  
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+}
+
+.box .row.controls {
+    flex: 0 1 auto;
+}
+
+.box .row.content {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+

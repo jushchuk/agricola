@@ -3,7 +3,7 @@ function populateTables(){
     let games = parseDataToGames(data);
     
     let tablesContainer = document.getElementById('tables_container');
-    let tablesFooter = document.getElementById('tables_footer');
+    //let tablesFooter = document.getElementById('tables_footer');
     
     for (let i=0; i<games.length; i++) {
         let gameNumber = games[i][0]['Game'];
@@ -26,8 +26,8 @@ function populateTables(){
         tables.push({'Game':gameNumber, 'Players':gamePlayers, 'Table':table});
 
         //add table to page... potentially do this another place
-        let div = wrapWithDiv(table, 'panel')
-        tablesContainer.insertBefore(div, tablesFooter);
+        let div = wrapWithDiv(table, 'table_div');
+        tablesContainer.append(div);
     }
 }
 
