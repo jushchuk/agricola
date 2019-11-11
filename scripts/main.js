@@ -19,11 +19,10 @@ function loadFile(url, callback /*, opt_arg1, opt_arg2, ... */) {
 
 // functions for manipulating CSV
 function parseCSV(CSVstring) {
-    arr = CSVstring.split('\n')
-    console.log(arr);
+    let arr = CSVstring.split('\n')
     let jsonObj = [];
     let headers = arr[0].split(',');
-    console.log(headers)
+
     for(let i = 1; i < arr.length; i++) {
         let data = arr[i].split(',');
         let obj = {};
@@ -52,52 +51,14 @@ function parseDataToGames(data) {
     return games;
 }
 
-// takes a single game data and makes it a table
-function createTable(gameData, captionText) {
-    let ignoreProperties = ['Players','Name','Horses','Winner','Game'];
-
-    //create table and caption
-    let table = document.createElement('table');
-    table.className = 'scoresheet';
-    let caption = table.createCaption();
-    caption.textContent = captionText;
-    
-    //determine row keys
-    let keys = ['Name'];
-    for (let property in gameData[0]) {
-        if(!ignoreProperties.includes(property)) {
-            keys.push(property);
-        }
-    }
-
-    //for each row key, populate the row
-    for (let k in keys) {
-        let row = table.insertRow(-1);
-        let cell = row.insertCell(-1);
-        cell.textContent = keys[k];
-        for(let i=0; i<5; i++) {
-            cell = row.insertCell(-1);
-            if(i<gameData.length) {
-                cell.textContent = gameData[i][keys[k]];
-
-                if(gameData[i]['Winner'] == 'True'){
-                    cell.className = 'winner';
-                }
-            }
-        }
-    }
-
-    //handle
-    let thead = table.createTHead();
-    let tbody = table.createTBody();
-    return table
-}
-
 //wraps any element with a div with a particular className
-function wrapWithDiv(element, className) {
+function wrapWithDiv(element, id, className) {
     let div = document.createElement('div');
     if (className) {
         div.className = className;
+    }
+    if (id) {
+        div.id = id;
     }
     div.append(element);
 
