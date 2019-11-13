@@ -45,7 +45,7 @@ function submitFilter() {
     
     let thresholdType = document.getElementById('threshold_type_select').selectedOptions[0].value;
     let thresholdComparison = document.getElementById('threshold_comparison_select').selectedOptions[0].value;
-    let thresholdValue = parseInt(document.getElementById('threshold_value_textbox').value);
+    let thresholdValue = parseInt(document.getElementById('threshold_value_input').value);
 
     let threshold = {'type': thresholdType, 'value': thresholdValue, 'comparison': thresholdComparison};
 
@@ -161,7 +161,9 @@ function resetFilter() {
     document.getElementById('exact_players_match_checkbox').checked = false;
 
     //reset threshold
-    document.getElementById('threshold_value_textbox').value = '';
+    document.getElementById('threshold_type_select').selectedIndex = 0;
+    document.getElementById('threshold_comparison_select').selectedIndex = 0;
+    document.getElementById('threshold_value_input').value = '';
 
     //now show all games
     for (let i = 1; i < tables.length + 1; i++) {
@@ -216,11 +218,13 @@ function populateFilterTools() {
         thresholdComparisonSelect.add(option);
     }
 
-    let thresholdValueTextbox = document.createElement('input');
-    thresholdValueTextbox.id = 'threshold_value_textbox';
-    thresholdValueTextbox.type = 'textbox';
-    thresholdValueTextbox.placeholder = 'Score';
-    thresholdValueTextbox.pattern = '[0-9]+';
+    let thresholdValueInput = document.createElement('input');
+    thresholdValueInput.id = 'threshold_value_input';
+    thresholdValueInput.className = 'score_input';
+    thresholdValueInput.type = 'number';
+    thresholdValueInput.min = '0';
+    thresholdValueInput.placeholder = 'Score';
+    //thresholdValueInput.pattern = '[0-9]+';
 
     //buttons
 
@@ -245,7 +249,7 @@ function populateFilterTools() {
     filterDiv.append(exactPlayersMatchCheckbox);
     filterDiv.append(thresholdTypeSelect);
     filterDiv.append(thresholdComparisonSelect);
-    filterDiv.append(thresholdValueTextbox);
+    filterDiv.append(thresholdValueInput);
     filterDiv.append(filterSubmit);
     filterDiv.append(filterReset);
     filterDiv.append(filterTableCount);
