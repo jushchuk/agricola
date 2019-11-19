@@ -4,10 +4,13 @@ var games = [];
 
 //helper var
 var allPlayers = [];
+var allWinners = ['Any'];
 var sortedPlayerCounts = [];
 
 const thresholdTypes = ['Winner\'s', 'Average', 'Margin'];
 const thresholdComparisons = ['>', '<', '='];
+const sortTypes = ['Game','Score','Average','Margin'];
+const sortOrders = ['ascending', 'descending'];
 const dataURL = 'https://raw.githubusercontent.com/jushchuk/agricola/master/data/gric-refined.csv';
 
 loadFile(dataURL, populateTablesPage);
@@ -38,6 +41,10 @@ function populateTablesPage() {
             } else {
                 playerCounts[player] += 1;
             }
+
+            if (games[i][j]['Winner'] == 'True' && !allWinners.includes(player)) {
+                allWinners.push(player);
+            }
         }
 
         //create the actual html table
@@ -63,8 +70,15 @@ function populateTablesPage() {
 
 function populateFilterTools() {
     let filterDiv = document.getElementById('table_filter');
-    
+
+    let filterForm = document.createElement('form');
+    filterForm.id = 'filter_form';
+
     //player filter
+    let playerFilterDiv = document.createElement('div');
+    playerFilterDiv.id = 'player_filter_div';
+    playerFilterDiv.className = 'section';
+
     let playerSelect = document.createElement('select');
     playerSelect.id = 'player_select';
     playerSelect.multiple = true;
@@ -74,6 +88,9 @@ function populateFilterTools() {
         option.text = sortedPlayerCounts[i][0];
         playerSelect.add(option);
     }
+    let playerSelectLabel = document.createElement('label');
+    playerSelectLabel.textContent = 'Select Players';
+    playerSelectLabel.htmlFor = 'player_select';
 
     let exactPlayersMatchCheckbox = document.createElement('input');
     exactPlayersMatchCheckbox.id = 'exact_players_match_checkbox';
@@ -82,10 +99,14 @@ function populateFilterTools() {
     exactPlayersMatchCheckboxLabel.textContent = 'Exact Players Match';
     exactPlayersMatchCheckboxLabel.htmlFor = 'exact_players_match_checkbox'
     
+
+    let otherFilterDiv = document.createElement('div');
+    otherFilterDiv.id = 'other_filter_div';
+    otherFilterDiv.className = 'section';
+
     // threshold filter
     let thresholdTypeSelect = document.createElement('select');
     thresholdTypeSelect.id = 'threshold_type_select';
-
     for (let i = 0; i < thresholdTypes.length; i++) {
         let option = document.createElement('option');
         option.value = thresholdTypes[i];
@@ -95,7 +116,6 @@ function populateFilterTools() {
 
     let thresholdComparisonSelect = document.createElement('select');
     thresholdComparisonSelect.id = 'threshold_comparison_select';
-
     for (let i = 0; i < thresholdComparisons.length; i++) {
         let option = document.createElement('option');
         option.value = thresholdComparisons[i];
@@ -115,14 +135,38 @@ function populateFilterTools() {
     winnerSelect.id = 'winner_select';
     let winnerOptions = [['Any',0]].concat(sortedPlayerCounts);
     for (let i = 0; i < winnerOptions.length; i++) {
-        option = document.createElement('option');
-        option.value = winnerOptions[i][0];
-        option.text = winnerOptions[i][0];
-        winnerSelect.add(option);
+        if (allWinners.includes(winnerOptions[i][0])) {
+            option = document.createElement('option');
+            option.value = winnerOptions[i][0];
+            option.text = winnerOptions[i][0];
+            winnerSelect.add(option);
+        }
     }
     let winnerSelectLabel = document.createElement('label');
     winnerSelectLabel.textContent = 'Winner';
     winnerSelectLabel.htmlFor = 'winner_select'
+
+    //sort
+    let sortTypeSelect = document.createElement('select');
+    sortTypeSelect.id = 'sort_type_select';
+    for (let i = 0; i < sortTypes.length; i++) {
+        let option = document.createElement('option');
+        option.value = sortTypes[i];
+        option.text = sortTypes[i];
+        sortTypeSelect.add(option);
+    }
+    let sortTypeSelectLabel = document.createElement('label');
+    sortTypeSelectLabel.textContent = 'Sort by';
+    sortTypeSelectLabel.htmlFor = 'sort_type_select'
+
+    let sortOrderSelect = document.createElement('select');
+    sortOrderSelect.id = 'sort_order_select';
+    for (let i = 0; i < sortOrders.length; i++) {
+        let option = document.createElement('option');
+        option.value = sortOrders[i];
+        option.text = sortOrders[i];
+        sortOrderSelect.add(option);
+    }
 
     //submit/reset buttons
     let filterSubmit = document.createElement('button');
@@ -139,17 +183,25 @@ function populateFilterTools() {
     filterTableCount.textContent = 'Showing all ' + games.length + ' tables';
     
     //append it all
-    filterDiv.append(playerSelect);
-    filterDiv.append(exactPlayersMatchCheckboxLabel);
-    filterDiv.append(exactPlayersMatchCheckbox);
-    filterDiv.append(thresholdTypeSelect);
-    filterDiv.append(thresholdComparisonSelect);
-    filterDiv.append(thresholdValueInput);
-    filterDiv.append(winnerSelectLabel);
-    filterDiv.append(winnerSelect);
-    filterDiv.append(filterSubmit);
-    filterDiv.append(filterReset);
-    filterDiv.append(filterTableCount);
+    playerFilterDiv.append(playerSelectLabel);
+    playerFilterDiv.append(playerSelect);
+    playerFilterDiv.append(exactPlayersMatchCheckboxLabel);
+    playerFilterDiv.append(exactPlayersMatchCheckbox);
+    otherFilterDiv.append(thresholdTypeSelect);
+    otherFilterDiv.append(thresholdComparisonSelect);
+    otherFilterDiv.append(thresholdValueInput);
+    otherFilterDiv.append(winnerSelectLabel);
+    otherFilterDiv.append(winnerSelect);
+    otherFilterDiv.append(sortTypeSelectLabel);
+    otherFilterDiv.append(sortTypeSelect);
+    otherFilterDiv.append(sortOrderSelect);
+    otherFilterDiv.append(filterSubmit);
+    otherFilterDiv.append(filterReset);
+    otherFilterDiv.append(filterTableCount);
+    
+    filterForm.append(playerFilterDiv);
+    filterForm.append(otherFilterDiv);
+    filterDiv.append(filterForm);
 
 }
 
@@ -193,38 +245,28 @@ function submitFilter() {
 
     let filteredGames = filterGames(validPlayers, exactPlayersMatch, threshold, winner);
     
-    let sorting = {};
     //sorting happens here
-    
+    let sortingType = document.getElementById('sort_type_select').selectedOptions[0].value;
+    let sortingOrder = document.getElementById('sort_order_select').selectedOptions[0].value;
+    let sorting = {'type': sortingType, 'order': sortingOrder};
+    let sortedFilteredGames = sortFilteredGames(filteredGames, sorting);
 
-    displayFilteredGames(filteredGames, sorting);
+    displayFilteredGames(sortedFilteredGames, sorting);
+
+    return false;
 }
 
 function resetFilter() {
-    //reset each filter option
-    let playerOptions = document.getElementById("player_select").options;
-    
-    for (let i = 0; i < playerOptions.length; i++) {
-      playerOptions[i].selected = false;
-    }
-
-    //reset checkbox
-    document.getElementById('exact_players_match_checkbox').checked = false;
-
-    //reset threshold
-    document.getElementById('threshold_type_select').selectedIndex = 0;
-    document.getElementById('threshold_comparison_select').selectedIndex = 0;
-    document.getElementById('threshold_value_input').value = '';
-
-    //reset winner
-    document.getElementById('winner_select').selectedIndex = 0;
-
+    //reset form
+    document.getElementById('filter_form').reset();
 
     //display all games
     displayFilteredGames(games);
 
     //reset table count 
     document.getElementById('table_count_span').textContent = 'Showing all ' + games.length + ' tables';
+
+    return false;
 }
 
 function filterGames(validPlayers, exactPlayersMatch, threshold, winner) {
@@ -359,4 +401,32 @@ function meetsThreshold(gameStats, threshold) {
     }
 
     return result;
+}
+
+function sortFilteredGames(filteredGames, sorting) {
+    switch (sorting.type) {
+        case 'Game':
+            break;
+        case 'Score':
+            filteredGames.sort(function(a, b) {
+                return produceGameStats(a).max - produceGameStats(b).max;
+            });
+            break;
+        case 'Average':
+            filteredGames.sort(function(a, b) {
+                return produceGameStats(a).average - produceGameStats(b).average;
+            });
+            break;
+        case 'Margin':
+            filteredGames.sort(function(a, b) {
+                return produceGameStats(a).margin - produceGameStats(b).margin;
+            });
+            break;
+    }
+
+    if (sorting.order == 'descending') {
+        filteredGames.reverse()
+    }
+
+    return filteredGames;
 }
