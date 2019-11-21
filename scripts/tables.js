@@ -81,7 +81,8 @@ function populateFilterTools() {
 
     let playerSelect = document.createElement('select');
     playerSelect.id = 'player_select';
-    playerSelect.multiple = true;
+    playerSelect.multiple = "true";
+    playerSelect.size = "1";
     for (let i = 0; i < sortedPlayerCounts.length; i++) {
         let option = document.createElement('option');
         option.value = sortedPlayerCounts[i][0];
@@ -126,8 +127,8 @@ function populateFilterTools() {
     let thresholdValueInput = document.createElement('input');
     thresholdValueInput.id = 'threshold_value_input';
     thresholdValueInput.className = 'score_input';
-    thresholdValueInput.type = 'number';
-    thresholdValueInput.min = '0';
+    thresholdValueInput.type = 'text';
+    thresholdValueInput.pattern = '[0-9]+';
     thresholdValueInput.placeholder = 'Score';
 
     //winner filter
