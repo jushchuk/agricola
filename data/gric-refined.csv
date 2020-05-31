@@ -1,4 +1,4 @@
-Game,Players,Player,Fields,Pastures,Grain,Vegetables,Sheep,Boar,Cattle,Horses,Unused,Fenced stables,Clay rooms,Stone rooms,Family,Cards,Bonus,Total,Winner
+Game,Players,Name,Fields,Pastures,Grain,Vegetables,Sheep,Boar,Cattle,Horses,Unused,Fenced stables,Clay rooms,Stone rooms,Family,Cards,Bonus,Total,Winner
 1,4,James,-1,2,1,-1,-1,2,-1.0,0,-2,1,5,0,12,3,0,20,False
 1,4,Nico,-1,4,-1,-1,-1,-1,-1.0,0,-5,1,0,6,15,1,0,16,False
 1,4,Calvin,2,4,2,2,-1,2,2.0,0,0,1,0,0,9,-11,0,12,False
